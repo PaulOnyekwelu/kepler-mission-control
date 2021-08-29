@@ -30,8 +30,12 @@ const loadPlanetData = async () => {
   });
 }
 
+const getAllPlanets = () => {
+  return planets
+}
+
 module.exports = {
   loadPlanetData,
-  planets
+  getAllPlanets
 }
 
