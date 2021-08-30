@@ -1,5 +1,7 @@
 const launches = new Map();
 
+let latestFlightNumber = 100;
+
 const launch = {
   flightNumber: 100,
   launchDate: new Date("November 2, 2025"),
@@ -17,4 +19,24 @@ const getAllLaunches = () => {
   return Array.from(launches.values());
 };
 
-module.exports = { getAllLaunches };
+const addNewLaunch = (launch) => {
+  latestFlightNumber++;
+  // launches.set(latestFlightNumber, Object.assign(launch, {
+  //   flightNumber: latestFlightNumber,
+  //   customer: ["SilCorp", "NASA"],
+  //   upcoming: true,
+  //   success: true
+  // }))
+  const newLaunch = {
+    ...launch,
+    flightDate: new Date(launch.flightDate),
+    flightNumber: latestFlightNumber,
+    customer: ["SilCorp", "NASA"],
+    upcoming: true,
+    success: true,
+  };
+  launches.set(latestFlightNumber, newLaunch);
+  return newLaunch;
+};
+
+module.exports = { getAllLaunches, addNewLaunch };
