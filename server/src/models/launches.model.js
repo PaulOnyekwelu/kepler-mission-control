@@ -8,12 +8,16 @@ const launch = {
   mission: "Kepler Exploration X",
   rocket: "Explorer IS1",
   target: "kepler 442b",
-  customer: ["SilCorp", "NASA"],
+  customers: ["SilCorp", "NASA"],
   upcoming: true,
   success: true,
 };
 
 launches.set(launch.flightNumber, launch);
+
+const isLaunchExist = (id) => {
+  return launches.has(id);
+};
 
 const getAllLaunches = () => {
   return Array.from(launches.values());
@@ -31,7 +35,7 @@ const addNewLaunch = (launch) => {
     ...launch,
     flightDate: new Date(launch.flightDate),
     flightNumber: latestFlightNumber,
-    customer: ["SilCorp", "NASA"],
+    customers: ["SilCorp", "NASA"],
     upcoming: true,
     success: true,
   };
@@ -39,4 +43,16 @@ const addNewLaunch = (launch) => {
   return newLaunch;
 };
 
-module.exports = { getAllLaunches, addNewLaunch };
+const abortLaunchById = (id) => {
+  const launch = launches.get(id);
+  const abortedLaunch = { ...launch, upcoming: false, success: false };
+  launches.set(id, abortedLaunch);
+  return abortedLaunch;
+};
+
+module.exports = {
+  isLaunchExist,
+  getAllLaunches,
+  addNewLaunch,
+  abortLaunchById,
+};
