@@ -22,6 +22,7 @@ describe("POST /launches", () => {
     rocket: "Silcorp-X IS1",
     target: "kepler-SIL 34IE",
   };
+
   test("it should respond with 201 created", async () => {
     const response = await request(app)
       .post("/launches")
@@ -34,5 +35,28 @@ describe("POST /launches", () => {
 
     expect(requestLaunchDate).toBe(responseLaunchDate);
     expect(response.body).toMatchObject(requestBodyWithoutDate);
+  });
+
+  test("it should catch missing required properties error", async () => {
+    const response = await request(app)
+      .post("/launches")
+      .send(requestBodyWithoutDate)
+      .expect("content-type", /json/)
+      .expect(400);
+
+    const expectedResponse = { error: "All fields are required" };
+
+    expect(response.body).toStrictEqual(expectedResponse);
+  });
+
+  test("it should catch invalid dates", async () => {
+    const response = await request(app)
+      .post("/launches")
+      .send({ ...requestBodyWithoutDate, launchDate: "hello" })
+      .expect(400);
+
+    expect(response.body).toStrictEqual({
+      error: "invalid date",
+    });
   });
 });
