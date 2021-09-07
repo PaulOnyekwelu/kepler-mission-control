@@ -28,14 +28,13 @@ const loadPlanetData = async () => {
         resolve();
       });
   });
-}
+};
 
 const getAllPlanets = () => {
-  return planets
-}
+  return planets;
+};
 
 module.exports = {
   loadPlanetData,
-  getAllPlanets
-}
-
+  getAllPlanets,
+};

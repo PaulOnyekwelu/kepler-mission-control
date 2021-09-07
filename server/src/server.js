@@ -1,6 +1,6 @@
 const http = require("http");
 const app = require("./app");
-const { loadPlanetData } = require("./models/planets.model");
+const { loadPlanetData } = require("./models/planet.model");
 const mongoose = require("mongoose");
 const chalk = require("chalk");
 
@@ -21,7 +21,7 @@ const startServer = async () => {
     useUnifiedTopology: true,
   });
 
-  await loadPlanetData();
+  // await loadPlanetData();
 
   server.listen(PORT, () => {
     console.log(`listening on port ${PORT}`);
