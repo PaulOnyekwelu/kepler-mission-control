@@ -67,7 +67,7 @@ async function abortLaunchById(id) {
     { flightNumber: id },
     { success: false, upcoming: false }
   );
-  return aborted.modifiedCount
+  return aborted.modifiedCount 
 }
 
 module.exports = {
