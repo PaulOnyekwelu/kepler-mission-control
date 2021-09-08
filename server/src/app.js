@@ -13,6 +13,7 @@ app.use(morgan("combined"));
 app.use(express.json());
 app.use(express.static(path.resolve(__dirname, "../public")));
 
+// api versioning
 app.use("/v1", v1Router)
 
 app.get("/*", (req, res) => {
