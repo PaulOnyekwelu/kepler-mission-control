@@ -34,17 +34,11 @@ describe("Launches API", () => {
     };
 
     test("it should respond with 201 created", async () => {
-      const response = await request(app)
+      await request(app)
         .post("/launches")
         .send(requestBody)
         .expect("content-type", /json/)
         .expect(201);
-
-      // const requestLaunchDate = new Date(requestBody.launchDate).valueOf();
-      // const responseLaunchDate = new Date(response.body.launchDate).valueOf();
-
-      // expect(requestLaunchDate).toBe(responseLaunchDate);
-      // expect(response.body).toMatchObject(requestBodyWithoutDate);
     });
 
     test("it should catch missing required properties error", async () => {
