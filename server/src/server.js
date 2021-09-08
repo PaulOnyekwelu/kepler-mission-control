@@ -1,18 +1,17 @@
 const http = require("http");
 const app = require("./app");
-const { loadPlanetData } = require("./models/planet.model");
+const { loadPlanetData } = require("./models/planets.model");
 const mongoose = require("mongoose");
 const chalk = require("chalk");
 
 mongoose.connection.once("open", () => {
-  console.log(chalk.bgWhite.green("connected succefully to database!"))
+  console.log(chalk.bgWhite.green("connected succefully to database!"));
 });
 
+const PORT = process.env.PORT || 8000;
+const server = http.createServer(app);
 
-const startServer = async () => {
-  const PORT = process.env.PORT || 8000;
-  const server = http.createServer(app);
-
+async function startServer () {
   // connecting to mongoose server
   const MONGO_URI =
     "mongodb+srv://Nasa-api-admin:EWnOpH06doalSxnZ@nasacluster.hrue0.mongodb.net/NASA-project?retryWrites=true&w=majority";
@@ -21,10 +20,10 @@ const startServer = async () => {
     useUnifiedTopology: true,
   });
 
-  // await loadPlanetData();
-
-  server.listen(PORT, () => {
-    console.log(`listening on port ${PORT}`);
-  });
+  await loadPlanetData();
 };
 startServer();
+
+server.listen(PORT, () => {
+  console.log(`listening on port ${PORT}`);
+});
