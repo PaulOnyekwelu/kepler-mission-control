@@ -39,7 +39,7 @@ async function populatePlanetDB() {
 async function loadPlanetData() {
   const isLoaded = await findPlanet({ keplerName: "Kepler-1410 b" });
   if(isLoaded){
-    console.log("Planet already loaded")
+    console.log("Planet data already loaded...")
   }else {
     populatePlanetDB()
   }
