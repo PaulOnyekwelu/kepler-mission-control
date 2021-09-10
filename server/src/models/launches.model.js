@@ -2,8 +2,6 @@ const axios = require("axios");
 const Launch = require("./launch.mongo");
 const Planet = require("./planet.mongo");
 
-const launches = new Map();
-
 const DEFAULT_FLIGHT_NUMBER = 100;
 const SPACEX_LAUNCH_DATA_URL = "https://api.spacexdata.com/v4/launches/query";
 

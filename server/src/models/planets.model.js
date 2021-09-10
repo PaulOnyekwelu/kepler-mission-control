@@ -12,7 +12,11 @@ function isHabitablePlanet(planet) {
   );
 }
 
-async function loadPlanetData() {
+async function findPlanet(filter) {
+  return await Planet.findOne(filter);
+}
+
+async function populatePlanetDB() {
   return new Promise((resolve, reject) => {
     fs.createReadStream(path.join(__dirname, "../../data/kepler_data.csv"))
       .pipe(parse({ comment: "#", columns: true }))
@@ -27,9 +31,18 @@ async function loadPlanetData() {
       .on("end", async () => {
         const allPlanetsFound = await getAllPlanets();
         console.log(`${allPlanetsFound.length} planets found`);
-        resolve()
+        resolve();
       });
   });
+}
+
+async function loadPlanetData() {
+  const isLoaded = await findPlanet({ keplerName: "Kepler-1410 b" });
+  if(isLoaded){
+    console.log("Planet already loaded")
+  }else {
+    populatePlanetDB()
+  }
 }
 
 async function getAllPlanets() {
