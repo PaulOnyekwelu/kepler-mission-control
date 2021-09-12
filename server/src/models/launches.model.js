@@ -61,6 +61,7 @@ async function loadLaunchData() {
       };
       saveLaunch(launchData);
     }
+    console.log("launch data successfully loaded...");
   }
 }
 
