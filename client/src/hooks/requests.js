@@ -1,13 +1,21 @@
 const API_URL = "http://localhost:8000/v1";
 
 async function httpGetPlanets() {
-  const response = await fetch(`${API_URL}/planets`);
-  return await response.json();
+  try {
+    const response = await fetch(`${API_URL}/planets`);
+    return await response.json();
+  } catch (error) {
+    console.log(error.message);
+  }
 }
 
 async function httpGetLaunches() {
-  const launches = await (await fetch(`${API_URL}/launches`)).json();
-  return launches.sort((a, b) => a.flightNumber - b.flightNumber);
+  try {
+    const launches = await (await fetch(`${API_URL}/launches`)).json();
+    return launches.sort((a, b) => a.flightNumber - b.flightNumber);
+  } catch (error) {
+    console.log(error.message);
+  }
 }
 
 async function httpSubmitLaunch(launch) {

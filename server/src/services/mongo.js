@@ -1,9 +1,6 @@
 const mongoose = require("mongoose");
 const chalk = require("chalk");
-
-// connecting to mongoose server
-const MONGO_URI =
-  "mongodb+srv://Nasa-api-admin:EWnOpH06doalSxnZ@nasacluster.hrue0.mongodb.net/NASA-project?retryWrites=true&w=majority";
+const keys = require("../config/keys")
 
 mongoose.connection.once("open", () => {
   console.log(chalk.bgWhite.green("connected succefully to database!"));
@@ -14,7 +11,7 @@ mongoose.connection.on("error", (err) => {
 });
 
 async function mongoConnect() {
-  await mongoose.connect(MONGO_URI, {
+  await mongoose.connect(keys.mongoURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
