@@ -8,7 +8,7 @@ const v1Router = require("./routes/v1/api")
 const app = express();
 
 // middlewares
-app.use(cors({ origin: "http://localhost:3000" }));
+app.use(cors());
 app.use(morgan("combined"));
 app.use(express.json());
 app.use(express.static(path.resolve(__dirname, "../public")));
