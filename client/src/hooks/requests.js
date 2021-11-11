@@ -1,4 +1,7 @@
-const API_URL = "http://localhost:8000/v1";
+const API_URL =
+  process.env.NODE_ENV == "production"
+    ? "https://kepler-mission-control.herokuapp.com/v1"
+    : "http://localhost:8000/v1";
 
 async function httpGetPlanets() {
   try {
